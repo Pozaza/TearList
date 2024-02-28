@@ -13,7 +13,7 @@ import java.util.zip.Inflater;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder>{
     final LayoutInflater inflater;
-    List<Item> items;
+    final List<Item> items;
 
     public ItemAdapter(Context context, List<Item> items) {
         this.inflater = LayoutInflater.from(context);
@@ -30,7 +30,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder>{
     public void onBindViewHolder(ItemAdapter.ViewHolder holder, int position) {
         Item item = items.get(position);
 
-        holder.idView.setText(item.id);
+        holder.idView.setText(String.valueOf(item.id));
         holder.nameView.setText(item.name);
     }
 
@@ -41,7 +41,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder>{
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         final TextView idView, nameView;
-
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
