@@ -1,26 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10.5dp"
+    android:layout_marginBottom="10.5dp"
+    android:layout_marginStart="5dp"
+    android:layout_marginEnd="5dp"
+    android:alpha="1"
+    android:background="@drawable/ripple"
+    android:backgroundTint="#262133"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="horizontal"
+    android:padding="15dp">
 
     <TextView
-        android:id="@+id/idText"
+        android:id="@+id/item_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:text="ID"
-        android:textAlignment="center"
+        android:layout_gravity="center_vertical"
+        android:focusable="false"
+        android:text="📃"
+        android:textSize="24sp" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_weight="1"
+        android:focusable="false"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/task_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autoSizeMaxTextSize="23sp"
+            android:autoSizeMinTextSize="17sp"
+            android:autoSizePresetSizes="uniform"
+            android:focusable="false"
+            android:fontFamily="@font/text_font"
+            android:text="Название задачи"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            app:autoSizeTextType="uniform" />
+
+        <TextView
+            android:id="@+id/task_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:focusable="false"
+            android:text="01.01.2023"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:visibility="visible" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/edit_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="✏️"
         android:textSize="24sp" />
 
     <TextView
-        android:id="@+id/nameText"
+        android:id="@+id/delete_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:text="Название"
-        android:textAlignment="center"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="❌"
         android:textSize="24sp" />
 
-</FrameLayout>
+</LinearLayout>

@@ -1,11 +1,16 @@
 package com.example.tearlist;
 
+import android.graphics.Color;
+
 public class Item {
     public int id;
-    public String name;
+    public String title = "", date = "", emoji = "";
+    public int backColor;
+    public boolean completed = false;
 
-    public Item(int id, String name){
-        this.id = id;
-        this.name = name;
+    public Item() { id = -1; }
+
+    public boolean isNull() {
+        return id == -1;
     }
 }
