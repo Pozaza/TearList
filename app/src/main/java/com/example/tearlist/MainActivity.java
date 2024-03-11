@@ -1,5 +1,6 @@
 package com.example.tearlist;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,6 +11,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -83,22 +85,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clearTasks(View view) {
-        for (final Item item: items) {
-            Animation animation =
-                    AnimationUtils.loadAnimation(listItem.getChildAt(items.indexOf(item)).getContext(),
-                    R.anim.delete_task);
-            listItem.getChildAt(items.indexOf(item)).startAnimation(animation);
-        }
+        DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
+            for (final Item item: items) {
+                Animation animation =
+                        AnimationUtils.loadAnimation(listItem.getChildAt(items.indexOf(item)).getContext(),
+                                R.anim.delete_task);
+                listItem.getChildAt(items.indexOf(item)).startAnimation(animation);
+            }
 
-        view.postDelayed(() -> {
-            items.clear();
-            runOnUiThread(() -> adapter.notifyDataSetChanged());
+            view.postDelayed(() -> {
+                items.clear();
+                runOnUiThread(() -> adapter.notifyDataSetChanged());
 
-            DBHelper dbHelper = new DBHelper(this);
-            SQLiteDatabase db = dbHelper.getWritableDatabase();
-            db.delete("task_db", null, null);
+                DBHelper dbHelper = new DBHelper(view.getContext());
+                SQLiteDatabase db = dbHelper.getWritableDatabase();
+                db.delete("task_db", null, null);
 
-            dbHelper.close();
-        }, 250);
+                dbHelper.close();
+            }, 250);
+        };
+
+        new AlertDialog.Builder(view.getContext())
+            .setMessage("Вы уверены что хотите удалить все задачи?")
+            .setPositiveButton("Да", dialogClickListener)
+            .setNegativeButton("Нет", null).show();
     }
 }

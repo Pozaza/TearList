@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.database.sqlite.SQLiteDatabase;
@@ -17,6 +18,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
@@ -104,16 +106,23 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemHolder>{
         });
 
         holder.deleteIcon.setOnClickListener(l -> {
-            Animation animation = AnimationUtils.loadAnimation(holder.itemView.getContext(),
-                    R.anim.delete_task);
-            holder.itemView.startAnimation(animation);
+            DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
+                Animation animation = AnimationUtils.loadAnimation(holder.itemView.getContext(),
+                        R.anim.delete_task);
+                holder.itemView.startAnimation(animation);
 
-            holder.itemView.postDelayed(() -> {
-                items.remove(item);
-                notifyDataSetChanged();
-            }, 250);
+                holder.itemView.postDelayed(() -> {
+                    items.remove(item);
+                    notifyDataSetChanged();
+                }, 250);
 
-            DeleteTask(item);
+                DeleteTask(item);
+            };
+
+            new AlertDialog.Builder(holder.itemView.getContext())
+                    .setMessage("Вы уверены что хотите удалить эту задачу?")
+                    .setPositiveButton("Да", dialogClickListener)
+                    .setNegativeButton("Нет", null).show();
         });
     }
 

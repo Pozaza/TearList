@@ -23,6 +23,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.emoji2.emojipicker.EmojiPickerView;
 
+import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.gson.Gson;
 import com.skydoves.colorpickerview.AlphaTileView;
 import com.skydoves.colorpickerview.ColorEnvelope;
@@ -44,7 +45,7 @@ public class TaskActivity extends AppCompatActivity {
     EmojiPickerView emojiPickerView;
     ImageView colorView;
     TextView textView;
-    CheckBox dateCheck;
+    MaterialSwitch dateCheck;
     TextView dateText;
 
     @Override
